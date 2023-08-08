@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { Grid } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
-import ActivityList from "./ActivityList";
 import ActivityFilters from "./ActivityFilters";
+import ActivityList from "./ActivityList";
 
 const ActivityDashboard = () => {
     const { activityStore } = useStore();
