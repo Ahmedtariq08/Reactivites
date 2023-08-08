@@ -26,16 +26,16 @@ const requests = {
     del: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 }
 
-const Routes = {
+const EndPoints = {
     Activities: '/activities'
 }
 
 const Activities = {
-    list: () => requests.get<Activity[]>(Routes.Activities),
-    details: (id: string) => requests.get<Activity>(`${Routes.Activities}/${id}`),
-    create: (activity: Activity) => requests.post<void>(Routes.Activities, activity),
-    update: (activity: Activity) => requests.put<void>(`${Routes.Activities}/${activity.id}`, activity),
-    delete: (id: string) => requests.del<void>(`${Routes.Activities}/${id}`)
+    list: () => requests.get<Activity[]>(EndPoints.Activities),
+    details: (id: string) => requests.get<Activity>(`${EndPoints.Activities}/${id}`),
+    create: (activity: Activity) => requests.post<void>(EndPoints.Activities, activity),
+    update: (activity: Activity) => requests.put<void>(`${EndPoints.Activities}/${activity.id}`, activity),
+    delete: (id: string) => requests.del<void>(`${EndPoints.Activities}/${id}`)
 }
 
 const agent = {
