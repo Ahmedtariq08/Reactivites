@@ -4,6 +4,8 @@ using Persistence;
 using static Application.Activities.Create;
 using FluentValidation;
 using Application.Core;
+using Application.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Activities
 {
@@ -27,12 +29,29 @@ namespace Application.Activities
     public class Handler : IRequestHandler<Command, Result<Unit>>
     {
         private readonly DataContext _context;
-        public Handler(DataContext context)
+        private readonly IUserAccessor _userAccessor;
+        public Handler(DataContext context, IUserAccessor userAccessor)
         {
             _context = context;
+            _userAccessor = userAccessor;
         }
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
+            //getting the user information and making that user the host 
+            //and the attendee of the activity being created
+            var user = await _context.Users.FirstOrDefaultAsync(
+                x => x.UserName == _userAccessor.GetUsername());
+
+            var attendee = new ActivityAttendee
+            {
+                AppUser = user,
+                Activity = request.Activity,
+                IsHost = true
+            };
+
+            request.Activity.Attendees.Add(attendee);
+
+            //Adding actitvity to the activitiy table list
             _context.Activities.Add(request.Activity);
             var result = await _context.SaveChangesAsync() > 0;
 
