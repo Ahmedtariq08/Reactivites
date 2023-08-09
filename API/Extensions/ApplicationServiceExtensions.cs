@@ -7,6 +7,7 @@ using FluentValidation.AspNetCore;
 using FluentValidation;
 using Application.Interfaces;
 using Infrastructure.Security;
+using Infrastructure.Photos;
 
 namespace API.Extensions
 {
@@ -34,6 +35,8 @@ namespace API.Extensions
             services.AddValidatorsFromAssemblyContaining<Create>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor, UserAccessor>();  //this would make these available in our application layer
+            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+            services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
             return services;
         }
 
