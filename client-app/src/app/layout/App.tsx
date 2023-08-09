@@ -1,10 +1,10 @@
+import HomePage from 'features/home/HomePage';
 import { observer } from 'mobx-react-lite';
+import { SkeletonTheme } from 'react-loading-skeleton';
 import { Outlet, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { Container } from 'semantic-ui-react';
 import NavBar from './Navbar';
-import HomePage from '../../features/home/HomePage';
-import { SkeletonTheme } from 'react-loading-skeleton';
-import { ToastContainer } from 'react-toastify';
 
 function App() {
   const location = useLocation();

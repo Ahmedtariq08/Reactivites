@@ -1,11 +1,11 @@
 import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
-import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
-import ActivityDetails from "../../features/activities/details/ActivityDetails";
-import ActivityForm from "../../features/activities/form/ActivityForm";
-import App from "../layout/App";
-import TestErrors from "../../features/errors/TestError";
-import NotFound from "../../features/errors/NotFound";
-import ServerError from "../../features/errors/ServerError";
+import ActivityDashboard from "features/activities/dashboard/ActivityDashboard";
+import ActivityDetails from "features/activities/details/ActivityDetails";
+import ActivityForm from "features/activities/form/ActivityForm";
+import App from "app/layout/App";
+import TestErrors from "features/errors/TestError";
+import NotFound from "features/errors/NotFound";
+import ServerError from "features/errors/ServerError";
 
 export const routes: RouteObject[] = [
     {

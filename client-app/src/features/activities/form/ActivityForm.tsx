@@ -4,14 +4,14 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Header, Segment } from 'semantic-ui-react';
 import * as Yup from 'yup';
-import MyTextInput from '../../../app/common/form/MyTextInput';
-import LoadingComponent from '../../../app/layout/LoadingComponent';
-import { Activity } from '../../../app/models/activity';
-import { useStore } from '../../../app/stores/store';
-import MyTextArea from '../../../app/common/form/MyTextArea';
-import MySelectInput from '../../../app/common/form/MySelectInput';
-import { categoryOptions } from '../../../app/common/options/categoryOptions';
-import MyDateInput from '../../../app/common/form/MyDateInput';
+import MyTextInput from 'app/common/form/MyTextInput';
+import LoadingComponent from 'app/layout/LoadingComponent';
+import { Activity } from 'app/models/activity';
+import { useStore } from 'app/stores/store';
+import MyTextArea from 'app/common/form/MyTextArea';
+import MySelectInput from 'app/common/form/MySelectInput';
+import { categoryOptions } from 'app/common/options/categoryOptions';
+import MyDateInput from 'app/common/form/MyDateInput';
 import { v4 as uuid } from 'uuid';
 
 const ActivityForm = () => {
