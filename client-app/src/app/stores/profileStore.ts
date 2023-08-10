@@ -95,6 +95,25 @@ export default class ProfileStore {
                 this.loading = false;
             })
         }
+    }
 
+    updateProfile = async (displayName: string, bio?: string) => {
+        this.loading = true;
+        try {
+            if (this.isCurrentUser) {
+                const updatedProfile = { ...this.profile, displayName: displayName, bio: bio } as Profile;
+                await agent.Profiles.updateAbout(updatedProfile);
+                runInAction(() => {
+                    this.profile = updatedProfile;
+                    store.userStore.user!.displayName = updatedProfile.displayName;
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            runInAction(() => {
+                this.loading = false;
+            })
+        }
     }
 }

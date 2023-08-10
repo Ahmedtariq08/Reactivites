@@ -118,7 +118,8 @@ const Profiles = {
         })
     },
     setMainPhoto: (photoId: string) => requests.post(`${EndPoints.Photos}/${photoId}/setMain`, {}),
-    deletePhoto: (photoId: string) => requests.del(`${EndPoints.Photos}/${photoId}`)
+    deletePhoto: (photoId: string) => requests.del(`${EndPoints.Photos}/${photoId}`),
+    updateAbout: (profile: Profile) => requests.put<void>(`${EndPoints.Profiles}/${profile.username}`, profile)
 }
 
 const agent = {
