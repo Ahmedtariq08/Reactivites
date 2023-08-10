@@ -1,3 +1,4 @@
+import { NavigateTo } from "app/router/Routes";
 import { Link } from "react-router-dom";
 import { Button, Header, Icon, Segment } from "semantic-ui-react";
 
@@ -10,7 +11,7 @@ const NotFound = () => {
 
             </Header>
             <Segment.Inline>
-                <Button as={Link} to='/activities'>Return to Activities Page</Button>
+                <Button as={Link} to={NavigateTo.Activities}>Return to Activities Page</Button>
             </Segment.Inline>
         </Segment>
     )

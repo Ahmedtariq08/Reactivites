@@ -4,6 +4,7 @@ import { Activity } from "app/models/activity";
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { useStore } from 'app/stores/store';
+import { NavigateTo } from 'app/router/Routes';
 
 const activityImageStyle = {
     filter: 'brightness(30%)'
@@ -43,7 +44,7 @@ export default observer(function ActivityDetailsHeader({ activity }: Props) {
                                 />
                                 <p>{format(activity.date!, 'dd MM yyyy')}</p>
                                 <p>
-                                    Hosted by <strong><Link to={`/profiles/${activity.host?.username}`}>{activity.host?.displayName}</Link></strong>
+                                    Hosted by <strong><Link to={NavigateTo.Profile(activity.host?.username!)}>{activity.host?.displayName}</Link></strong>
                                 </p>
                             </Item.Content>
                         </Item>
@@ -63,7 +64,7 @@ export default observer(function ActivityDetailsHeader({ activity }: Props) {
                         />
                         <Button
                             as={Link}
-                            to={`/manage/${activity.id}`}
+                            to={NavigateTo.ManageActivity(activity.id)}
                             color='orange'
                             floated='right'
                             disabled={activity.isCancelled}

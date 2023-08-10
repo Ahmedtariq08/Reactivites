@@ -3,6 +3,7 @@ import { Button, Icon, Item, Label, Segment } from "semantic-ui-react";
 import { Activity } from "app/models/activity";
 import { format } from "date-fns";
 import ActivityListItemAttendee from "./ActivityListItemAttendee";
+import { NavigateTo } from "app/router/Routes";
 
 interface Props {
     activity: Activity
@@ -19,12 +20,12 @@ const ActivityListItem = (props: Props) => {
                 }
                 <Item.Group>
                     <Item>
-                        <Item.Image style={{ marginBottom: 3 }} size="tiny" circular src='/assets/user.png' />
+                        <Item.Image style={{ marginBottom: 3 }} size="tiny" circular src={activity.host?.image || '/assets/user.png'} />
                         <Item.Content>
-                            <Item.Header as={Link} to={`/activities/${activity.id}`}>
+                            <Item.Header as={Link} to={NavigateTo.Activity(activity.id)}>
                                 {activity.title}
                             </Item.Header>
-                            <Item.Description>Hosted by {activity.host?.displayName}</Item.Description>
+                            <Item.Description>Hosted by <Link to={NavigateTo.Profile(activity.hostUsername)}>{activity.host?.displayName}</Link></Item.Description>
                             {activity.isHost && (
                                 <Item.Description>
                                     <Label basic color="orange">
@@ -56,7 +57,7 @@ const ActivityListItem = (props: Props) => {
                 <span>{activity.description}</span>
                 <Button
                     as={Link}
-                    to={`/activities/${activity.id}`}
+                    to={NavigateTo.Activity(activity.id)}
                     color="teal"
                     floated="right"
                     content="View"

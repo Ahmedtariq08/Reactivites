@@ -1,4 +1,5 @@
 import { Profile } from "app/models/profile";
+import { NavigateTo } from "app/router/Routes";
 import { observer } from "mobx-react-lite"
 import { Link } from "react-router-dom";
 import { Card, Icon, Image } from "semantic-ui-react";
@@ -10,7 +11,7 @@ interface Props {
 const ProfileCard = (props: Props) => {
     const { profile } = props;
     return (
-        <Card as={Link} to={`/profiles/${profile.username}`}>
+        <Card as={Link} to={NavigateTo.Profile(profile.username)}>
             <Image src={profile.image || 'assets/user.png'} />
             <Card.Content>
                 <Card.Header>

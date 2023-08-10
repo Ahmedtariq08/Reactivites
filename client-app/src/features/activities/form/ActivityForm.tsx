@@ -5,6 +5,7 @@ import MyTextInput from 'app/common/form/MyTextInput';
 import { categoryOptions } from 'app/common/options/categoryOptions';
 import LoadingComponent from 'app/layout/LoadingComponent';
 import { ActivityFormValues } from 'app/models/activity';
+import { NavigateTo } from 'app/router/Routes';
 import { useStore } from 'app/stores/store';
 import { Form, Formik } from 'formik';
 import { observer } from 'mobx-react-lite';
@@ -82,7 +83,7 @@ const ActivityForm = () => {
                             content='Submit'
                             disabled={isSubmitting || !dirty || !isValid}
                         />
-                        <Button as={Link} to='/activities' floated='right' type='button' content='Cancel' />
+                        <Button as={Link} to={NavigateTo.Activities} floated='right' type='button' content='Cancel' />
                     </Form>
                 )}
             </Formik>

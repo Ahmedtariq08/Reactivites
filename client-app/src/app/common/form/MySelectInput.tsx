@@ -9,7 +9,7 @@ interface Props {
 }
 
 const MySelectInput = (props: Props) => {
-    const { placeholder, name, label } = props;
+    const { placeholder, name } = props;
     const [field, meta, helpers] = useField(name);
     return (
         <Form.Field error={meta.touched && !!meta.error}>

@@ -1,3 +1,4 @@
+import { NavigateTo } from "app/router/Routes";
 import { useStore } from "app/stores/store";
 import LoginForm from "features/users/LoginForm";
 import RegisterForm from "features/users/RegisterForm";
@@ -17,7 +18,7 @@ const HomePage = () => {
                 {userStore.isLoggedIn ? (
                     <>
                         <Header as='h2' inverted content='Welcome to Reactivities' />
-                        <Button as={Link} to='/activities' size="huge" inverted>
+                        <Button as={Link} to={NavigateTo.Activities} size="huge" inverted>
                             Go to Activities!
                         </Button>
                     </>

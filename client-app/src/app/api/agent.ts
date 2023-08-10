@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { router } from "../router/Routes";
 import { store } from "../stores/store";
 import { User, UserFormValues } from "app/models/user";
+import { Photo, Profile } from "app/models/profile";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -87,7 +88,9 @@ const requests = {
 
 const EndPoints = {
     Activities: '/activities',
-    Account: '/account'
+    Account: '/account',
+    Profiles: '/profiles',
+    Photos: '/photos'
 }
 
 const Activities = {
@@ -105,9 +108,23 @@ const Account = {
     register: (user: UserFormValues) => requests.post<User>(`${EndPoints.Account}/register`, user)
 }
 
+const Profiles = {
+    get: (username: string) => requests.get<Profile>(`${EndPoints.Profiles}/${username}`),
+    uploadPhoto: (file: Blob) => {
+        let formData = new FormData();
+        formData.append('File', file);
+        return axios.post<Photo>('photos', formData, {
+            headers: { 'Content-Type': 'Content-Type' }
+        })
+    },
+    setMainPhoto: (photoId: string) => requests.post(`${EndPoints.Photos}/${photoId}/setMain`, {}),
+    deletePhoto: (photoId: string) => requests.del(`${EndPoints.Photos}/${photoId}`)
+}
+
 const agent = {
     Activities,
-    Account
+    Account,
+    Profiles
 }
 
 export default agent;
