@@ -1,10 +1,11 @@
+import { PaginatedResult } from "app/models/pagination";
+import { Photo, Profile } from "app/models/profile";
+import { User, UserFormValues } from "app/models/user";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { Activity, ActivityFormValues } from "../models/activity";
 import { toast } from "react-toastify";
+import { Activity, ActivityFormValues } from "../models/activity";
 import { router } from "../router/Routes";
 import { store } from "../stores/store";
-import { User, UserFormValues } from "app/models/user";
-import { Photo, Profile } from "app/models/profile";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -38,6 +39,12 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(async response => {
     //handle success here
     await sleep(1000);
+    //handle pagination
+    const pagination = response.headers['pagination'];
+    if (pagination) {
+        response.data = new PaginatedResult(response.data, JSON.parse(pagination));
+        return response as AxiosResponse<PaginatedResult<any>>
+    }
     return response;
 }, (error: AxiosError) => {
     //handle error here
@@ -95,7 +102,7 @@ const EndPoints = {
 }
 
 const Activities = {
-    list: () => requests.get<Activity[]>(EndPoints.Activities),
+    list: (params: URLSearchParams) => axios.get<PaginatedResult<Activity[]>>(EndPoints.Activities, { params: params }).then(responseBody),
     details: (id: string) => requests.get<Activity>(`${EndPoints.Activities}/${id}`),
     create: (activity: ActivityFormValues) => requests.post<void>(EndPoints.Activities, activity),
     update: (activity: ActivityFormValues) => requests.put<void>(`${EndPoints.Activities}/${activity.id}`, activity),

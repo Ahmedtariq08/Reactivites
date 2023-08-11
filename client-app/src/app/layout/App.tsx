@@ -1,14 +1,13 @@
+import ModalContainer from 'app/common/modals/ModalContainer';
+import { useStore } from 'app/stores/store';
 import HomePage from 'features/home/HomePage';
 import { observer } from 'mobx-react-lite';
-import { SkeletonTheme } from 'react-loading-skeleton';
+import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Container } from 'semantic-ui-react';
-import NavBar from './Navbar';
-import { useStore } from 'app/stores/store';
-import { useEffect } from 'react';
 import LoadingComponent from './LoadingComponent';
-import ModalContainer from 'app/common/modals/ModalContainer';
+import NavBar from './Navbar';
 
 function App() {
   const location = useLocation();
@@ -31,12 +30,12 @@ function App() {
       <ModalContainer />
       <ToastContainer position='bottom-right' hideProgressBar theme='colored' />
       {location.pathname === '/' ? <HomePage /> :
-        <SkeletonTheme baseColor="#f6f7f8" highlightColor="#e5e6e9">
+        <>
           <NavBar />
           <Container style={{ marginTop: '7rem' }}>
             <Outlet />
           </Container>
-        </SkeletonTheme>
+        </>
       }
     </>
   );
