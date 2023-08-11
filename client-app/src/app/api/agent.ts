@@ -90,7 +90,8 @@ const EndPoints = {
     Activities: '/activities',
     Account: '/account',
     Profiles: '/profiles',
-    Photos: '/photos'
+    Photos: '/photos',
+    Follow: '/follow'
 }
 
 const Activities = {
@@ -119,7 +120,9 @@ const Profiles = {
     },
     setMainPhoto: (photoId: string) => requests.post(`${EndPoints.Photos}/${photoId}/setMain`, {}),
     deletePhoto: (photoId: string) => requests.del(`${EndPoints.Photos}/${photoId}`),
-    updateAbout: (profile: Profile) => requests.put<void>(`${EndPoints.Profiles}/${profile.username}`, profile)
+    updateAbout: (profile: Profile) => requests.put<void>(`${EndPoints.Profiles}/${profile.username}`, profile),
+    updateFollowing: (username: string) => requests.post(`${EndPoints.Follow}/${username}`, {}),
+    listFollowings: (username: string, predicate: "followers" | "following") => requests.get<Profile[]>(`${EndPoints.Follow}/${username}?predicate=${predicate}`)
 }
 
 const agent = {
