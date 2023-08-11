@@ -2,6 +2,7 @@ import agent from "app/api/agent";
 import { Photo, Profile } from "app/models/profile";
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { store } from "./store";
+import { EventPredicate, UserEvent } from "app/models/event";
 
 export default class ProfileStore {
     profile: Profile | null = null;
@@ -11,6 +12,10 @@ export default class ProfileStore {
     loadingFollowings = false;
     followings: Profile[] = [];
     activeTab = 0;
+    //for events
+    eventsRegistry: Map<EventPredicate, UserEvent[]> = new Map();
+    userActivities: UserEvent[] = [];
+    loadingEvents = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -180,5 +185,30 @@ export default class ProfileStore {
                 this.loadingFollowings = false;
             })
         }
+    }
+
+    loadUserActivities = async (predicate: EventPredicate) => {
+        this.loadingEvents = true;
+        try {
+            if (this.eventsRegistry.has(predicate)) {
+                this.userActivities = this.eventsRegistry.get(predicate)!;
+            } else {
+                const activities = await agent.Profiles.listUserActivities(this.profile?.username!, predicate);
+                runInAction(() => {
+                    this.userActivities = activities;
+                    this.eventsRegistry.set(predicate, activities);
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            runInAction(() => {
+                this.loadingEvents = false;
+            })
+        }
+    }
+
+    clearEventsRegistry = () => {
+        this.eventsRegistry.clear();
     }
 }
