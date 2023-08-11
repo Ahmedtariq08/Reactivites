@@ -16,7 +16,7 @@ namespace API.Controllers
         [HttpGet("{username}")]
         public async Task<IActionResult> GetFollowings(string username, string predicate)
         {
-            return HandleResult(await Mediator.Send(new List.Query { Username = username, Predicate = predicate }));
+            return HandleResult(await Mediator.Send(new Application.Followers.List.Query { Username = username, Predicate = predicate }));
         }
 
 

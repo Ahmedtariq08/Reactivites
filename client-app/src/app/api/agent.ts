@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { Activity, ActivityFormValues } from "../models/activity";
 import { router } from "../router/Routes";
 import { store } from "../stores/store";
+import { EventPredicate, UserEvent } from "app/models/event";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -129,7 +130,8 @@ const Profiles = {
     deletePhoto: (photoId: string) => requests.del(`${EndPoints.Photos}/${photoId}`),
     updateAbout: (profile: Profile) => requests.put<void>(`${EndPoints.Profiles}/${profile.username}`, profile),
     updateFollowing: (username: string) => requests.post(`${EndPoints.Follow}/${username}`, {}),
-    listFollowings: (username: string, predicate: "followers" | "following") => requests.get<Profile[]>(`${EndPoints.Follow}/${username}?predicate=${predicate}`)
+    listFollowings: (username: string, predicate: "followers" | "following") => requests.get<Profile[]>(`${EndPoints.Follow}/${username}?predicate=${predicate}`),
+    listUserActivities: (username: string, predicate: EventPredicate) => requests.get<UserEvent[]>(`${EndPoints.Profiles}/${username}/activities?predicate=${predicate}`)
 }
 
 const agent = {
