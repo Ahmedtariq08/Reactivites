@@ -6,7 +6,6 @@
 #App settings
 appsettings.json
 .env
-wwwroot
 reactivities.db/*
 myconfig.md
 
