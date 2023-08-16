@@ -58,3 +58,13 @@ Run command
 ```
 fly deploy
 ```
+
+List all apps with fly
+```
+fly apps list
+```
+
+Checking logs of deployed app
+```
+fly logs -a {appname}
+```
