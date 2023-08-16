@@ -26,10 +26,38 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
+
+//Adding secruity headers
+app.UseXContentTypeOptions(); //prevents mime sniffing of content type
+app.UseReferrerPolicy(opt => opt.NoReferrer());
+app.UseXXssProtection(opt => opt.EnabledWithBlockMode());   //protects aagainst xss attacks
+app.UseXfo(opt => opt.Deny()); //prevents application to be used inside iframe
+
+//the major one: main defense against cross-site scripting because it
+//white sources approved content, such as fonts from google or images 
+//from cloudinary
+app.UseCsp(opt => opt
+    .BlockAllMixedContent() //only load https content
+    .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com"))    //the content should only come from our domain
+    .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:"))
+    .FormActions(s => s.Self())
+    .FrameAncestors(s => s.Self())
+    .ImageSources(s => s.Self().CustomSources("blob:", "https://res.cloudinary.com"))
+    .ScriptSources(s => s.Self())
+);
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    app.Use(async (context, next) =>
+    {
+        context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");
+        await next.Invoke();
+    });
 }
 
 // app.UseHttpsRedirection();
