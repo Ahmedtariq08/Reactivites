@@ -1,0 +1,23 @@
+# fly.toml app configuration file generated for reactivities-ahmed on 2023-08-16T15:23:21+05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "reactivities-ahmed"
+primary_region = "hkg"
+
+[build]
+  image = "ahmedtariq08/reactivities:latest"
+
+[env]
+  ASPNETCORE_URLS="http://+:8080"
+  Cloudinary__CloudName="dxovuzh9k"
+  Cloudinary_ApiKey="895364816821276"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
