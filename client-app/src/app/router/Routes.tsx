@@ -8,6 +8,7 @@ import NotFound from "features/errors/NotFound";
 import ServerError from "features/errors/ServerError";
 import LoginForm from "features/users/LoginForm";
 import ProfilePage from "features/profiles/ProfilePage";
+import RequireAuth from "./RequireAuth";
 
 const Paths = {
     Root: '/',
@@ -42,13 +43,17 @@ export const routes: RouteObject[] = [
         path: Paths.Root,
         element: <App />,
         children: [
-            { path: Paths.Activities, element: <ActivityDashboard /> },
-            { path: Paths.Activity, element: <ActivityDetails /> },
-            { path: Paths.CreateActivity, element: <ActivityForm key={'create'} /> },
-            { path: Paths.ManageActivity, element: <ActivityForm key={'manage'} /> },
-            { path: Paths.Profile, element: <ProfilePage /> },
-            { path: Paths.Login, element: <LoginForm /> },
-            { path: Paths.Errors, element: <TestErrors /> },
+            {
+                element: <RequireAuth />, children: [
+                    { path: Paths.Activities, element: <ActivityDashboard /> },
+                    { path: Paths.Activity, element: <ActivityDetails /> },
+                    { path: Paths.CreateActivity, element: <ActivityForm key={'create'} /> },
+                    { path: Paths.ManageActivity, element: <ActivityForm key={'manage'} /> },
+                    { path: Paths.Profile, element: <ProfilePage /> },
+                    { path: Paths.Login, element: <LoginForm /> },
+                    { path: Paths.Errors, element: <TestErrors /> },
+                ]
+            },
             { path: Paths.NotFound, element: <NotFound /> },
             { path: Paths.ServerError, element: <ServerError /> },
             { path: '*', element: <Navigate replace to={NavigateTo.NotFound} /> },

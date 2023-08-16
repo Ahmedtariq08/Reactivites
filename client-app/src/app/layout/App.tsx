@@ -3,7 +3,7 @@ import { useStore } from 'app/stores/store';
 import HomePage from 'features/home/HomePage';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Container } from 'semantic-ui-react';
 import LoadingComponent from './LoadingComponent';
@@ -27,6 +27,7 @@ function App() {
 
   return (
     <>
+      <ScrollRestoration />
       <ModalContainer />
       <ToastContainer position='bottom-right' hideProgressBar theme='colored' />
       {location.pathname === '/' ? <HomePage /> :

@@ -6,6 +6,8 @@
 #App settings
 appsettings.json
 .env
+wwwroot
+reactivities.db/*
 
 # User-specific files
 *.rsuser

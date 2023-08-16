@@ -14,7 +14,7 @@ const sleep = (delay: number) => {
     })
 }
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 axios.interceptors.request.use(config => {
     const token = store.commonStore.token;
@@ -39,7 +39,9 @@ axios.interceptors.request.use(config => {
 //OR we can use the sequence call back function to handle responses
 axios.interceptors.response.use(async response => {
     //handle success here
-    await sleep(1000);
+    if (process.env.NODE_ENV === 'development') {
+        await sleep(1000);
+    }
     //handle pagination
     const pagination = response.headers['pagination'];
     if (pagination) {
