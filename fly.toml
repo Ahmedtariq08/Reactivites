@@ -13,6 +13,7 @@ primary_region = "hkg"
   ASPNETCORE_URLS="http://+:8080"
   Cloudinary__CloudName="dxovuzh9k"
   Cloudinary__ApiKey="895364816821276"
+  Sendgrid_User="ahmedtariq"
 
 [http_service]
   internal_port = 8080

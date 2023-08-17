@@ -9,6 +9,7 @@ using Application.Interfaces;
 using Infrastructure.Security;
 using Infrastructure.Photos;
 using System;
+using Infrastructure.Email;
 
 namespace API.Extensions
 {
@@ -80,6 +81,7 @@ namespace API.Extensions
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
             services.AddSignalR();
+            services.AddScoped<EmailSender>();
             return services;
         }
 
