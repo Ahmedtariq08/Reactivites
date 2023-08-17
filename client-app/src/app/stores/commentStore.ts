@@ -37,7 +37,6 @@ export default class CommentStore {
 
             //Add any new comment signal to existing comments
             this.hubConnection.on('ReceiveComment', (comment: ChatComment) => {
-                console.log(['comment received', comment]);
                 runInAction(() => {
                     comment.createdAt = new Date(comment.createdAt);
                     this.comments.unshift(comment);
@@ -59,7 +58,6 @@ export default class CommentStore {
         values.activityId = store.activityStore.selectedActivity?.id;
         try {
             //Invoke method should match the name of the method created in Chathub
-            console.log(['Adding comment', values]);
             await this.hubConnection?.invoke("SendComment", values);
 
         } catch (error) {
