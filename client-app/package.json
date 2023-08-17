@@ -40,7 +40,7 @@
     "yup": "^1.2.0"
   },
   "scripts": {
-    "start": "HTTPS=true SSL_CRT_FILE=./localhost.pem SSL_KEY_FILE=./localhost-key.pem react-scripts start",
+    "start": "react-scripts start",
     "build": "BUILD_PATH='../API/wwwroot' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

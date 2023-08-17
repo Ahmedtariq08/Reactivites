@@ -33,6 +33,8 @@ namespace API.Extensions
                         IssuerSigningKey = key,
                         ValidateIssuer = false,
                         ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
                     };
                     //This auth setting is required for chat hub to authenticate SignalR requests
                     opt.Events = new JwtBearerEvents

@@ -6,6 +6,7 @@ import { router } from "app/router/Routes";
 
 export default class UserStore {
     user: User | null = null;
+    refreshTokenTimeout: any;
 
     constructor() {
         makeAutoObservable(this)
@@ -19,6 +20,7 @@ export default class UserStore {
         try {
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
+            this.startRefreshTokenTimer(user);
             runInAction(() => {
                 this.user = user;
             });
@@ -34,6 +36,7 @@ export default class UserStore {
         try {
             const user = await agent.Account.register(creds);
             store.commonStore.setToken(user.token);
+            this.startRefreshTokenTimer(user);
             runInAction(() => {
                 this.user = user;
             });
@@ -54,6 +57,7 @@ export default class UserStore {
     getUser = async () => {
         try {
             const user = await agent.Account.current();
+            this.startRefreshTokenTimer(user);
             runInAction(() => {
                 this.user = user;
             })
@@ -66,5 +70,29 @@ export default class UserStore {
         if (this.user) {
             this.user.image = image;
         }
+    }
+
+    refreshToken = async () => {
+        try {
+            const user = await agent.Account.refreshToken();
+            runInAction(() => {
+                this.user = user;
+                store.commonStore.setToken(user.token);
+                this.startRefreshTokenTimer(user);
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    private startRefreshTokenTimer(user: User) {
+        const jwtToken = JSON.parse(atob(user.token.split(".")[1]));
+        const expires = new Date(jwtToken.exp * 1000);
+        const timeOut = expires.getTime() - Date.now() - (30 * 1000);
+        this.refreshTokenTimeout = setTimeout(this.refreshToken, timeOut);
+    }
+
+    private stopRefreshTokenTimer() {
+        clearTimeout(this.refreshTokenTimeout);
     }
 }
