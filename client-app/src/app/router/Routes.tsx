@@ -9,6 +9,8 @@ import ServerError from "features/errors/ServerError";
 import LoginForm from "features/users/LoginForm";
 import ProfilePage from "features/profiles/ProfilePage";
 import RequireAuth from "./RequireAuth";
+import RegisterSuccess from "features/users/RegisterSuccess";
+import ConfirmEmail from "features/users/ConfirmEmail";
 
 const Paths = {
     Root: '/',
@@ -20,7 +22,9 @@ const Paths = {
     Login: 'login',
     Errors: 'errors',
     NotFound: 'not-found',
-    ServerError: 'server-error'
+    ServerError: 'server-error',
+    RegisterSuccess: 'account/registerSuccess',
+    VerifyEmail: 'account/verifyEmail',
 }
 
 //used in Link to={} or useNavigate
@@ -34,7 +38,9 @@ export const NavigateTo = {
     Login: `/${Paths.Login}`,
     Errors: `/${Paths.Errors}`,
     NotFound: `/${Paths.NotFound}`,
-    ServerError: `/${Paths.ServerError}`
+    ServerError: `/${Paths.ServerError}`,
+    RegisterSuccess: (email: string) => `/${Paths.RegisterSuccess}?email=${email}`,
+    VerifyEmail: (token: string, email: string) => `/${Paths.VerifyEmail}?token=${token}&email=${email}`,
 }
 
 
@@ -56,6 +62,8 @@ export const routes: RouteObject[] = [
             },
             { path: Paths.NotFound, element: <NotFound /> },
             { path: Paths.ServerError, element: <ServerError /> },
+            { path: Paths.RegisterSuccess, element: <RegisterSuccess /> },
+            { path: Paths.VerifyEmail, element: <ConfirmEmail /> },
             { path: '*', element: <Navigate replace to={NavigateTo.NotFound} /> },
         ]
     }

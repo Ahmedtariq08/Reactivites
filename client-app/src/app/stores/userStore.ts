@@ -1,8 +1,8 @@
 import agent from "app/api/agent";
 import { User, UserFormValues } from "app/models/user";
+import { NavigateTo, router } from "app/router/Routes";
 import { makeAutoObservable, runInAction } from "mobx";
 import { store } from "./store";
-import { router } from "app/router/Routes";
 
 export default class UserStore {
     user: User | null = null;
@@ -34,17 +34,16 @@ export default class UserStore {
 
     register = async (creds: UserFormValues) => {
         try {
-            const user = await agent.Account.register(creds);
-            store.commonStore.setToken(user.token);
-            this.startRefreshTokenTimer(user);
-            runInAction(() => {
-                this.user = user;
-            });
-            router.navigate('/activities');
+            await agent.Account.register(creds);
+            router.navigate(NavigateTo.RegisterSuccess(creds.email));
             store.modalStore.closeModal();
-        } catch (error) {
-            console.log(error);
-            throw error;
+        } catch (error: any) {
+            if (error?.response?.status === 400) {
+                throw error;
+            } else {
+                console.log(error);
+                store.modalStore.closeModal();
+            }
         }
     }
 
