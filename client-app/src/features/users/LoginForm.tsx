@@ -1,37 +1,11 @@
-import { TextField, Typography, Button, CircularProgress } from "@mui/material";
-import MyTextInput from "app/common/form/MyTextInput";
-import { useStore } from "app/stores/store";
-import { ErrorMessage, Form, Formik, useFormik } from "formik";
-import { observer } from "mobx-react-lite";
-import * as yup from 'yup';
 import { LoadingButton } from '@mui/lab';
-import { Header, Label } from "semantic-ui-react";
+import { CircularProgress, TextField, Typography } from "@mui/material";
+import { useStore } from "app/stores/store";
+import { useFormik } from "formik";
+import { observer } from "mobx-react-lite";
 import { toast } from "react-toastify";
+import * as yup from 'yup';
 
-// const LoginForm = () => {
-//     const { userStore } = useStore();
-//     return (
-//         <Formik
-//             initialValues={{ email: '', password: '', error: null }}
-//             onSubmit={(values, { setErrors }) => userStore.login(values)
-//                 .catch(error => setErrors({ error: error.response.data }))}
-//         >
-//             {({ handleSubmit, isSubmitting, errors }) => (
-//                 <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
-//                     <Header as={'h2'} content='Login to Reactivities' color="teal" textAlign="center" />
-//                     <MyTextInput placeholder="Email" name='email' />
-//                     <MyTextInput placeholder="Password" name='password' type='password' />
-//                     <ErrorMessage
-//                         name='error'
-//                         render={() => <Label style={{ marginBottom: 10 }} basic color="red" content={errors.error} />}
-//                     />
-//                     <Button loading={isSubmitting} positive content='Login' type='submit' fluid />
-//                 </Form>
-//             )}
-
-//         </Formik>
-//     )
-// }
 
 const validationSchema = yup.object({
     email: yup
@@ -51,16 +25,16 @@ const LoginForm = () => {
         initialValues: {
             email: '',
             password: '',
+            error: null
         },
         validationSchema: validationSchema,
-        onSubmit: (values) => userStore.login(values)
+        onSubmit: (values, { setErrors }) => userStore.login(values)
             .catch((error) => {
                 const errorMessage = error.response.data;
                 toast.error(errorMessage);
+                // setErrors({ error: errorMessage });
             })
     });
-
-
 
     return (
         <div>
