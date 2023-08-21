@@ -2,6 +2,11 @@ body {
   background-color: #eaeaea;
 }
 
+@font-face {
+  font-family: Fiver;
+  src: url('/public/assets/FiverRegular.ttf');
+}
+
 .ui.inverted.top.fixed.menu {
   background-image: linear-gradient(135deg, rgb(24, 42, 115) 0%, rgb(33, 138, 174) 69%, rgb(32, 167, 172) 89%);
 }
@@ -42,4 +47,29 @@ body {
 
 .react-datepicker-wrapper {
   width: 100%;
+}
+
+
+/* STYLES FOR MATERIAL UI */
+.marvel-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/public/assets/marvel/homeBackground.jpg') !important;
+  background-size: cover !important;
+  width: 100vw;
+  height: 100vh;
+}
+
+.content-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.home-buttons {
+  width: 300;
+  font-weight: 600;
+  font-size: larger;
 }
