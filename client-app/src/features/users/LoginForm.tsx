@@ -45,7 +45,7 @@ const LoginForm = () => {
                     fontWeight={600}
                     margin={'1rem 0'}> Login to Reactivities </Typography>
                 <TextField
-                    fullWidth
+                    fullWidth={true}
                     margin="normal"
                     id="email"
                     name="email"
@@ -57,7 +57,7 @@ const LoginForm = () => {
                     helperText={formik.touched.email && formik.errors.email}
                 />
                 <TextField
-                    fullWidth
+                    fullWidth={true}
                     margin="normal"
                     id="password"
                     name="password"

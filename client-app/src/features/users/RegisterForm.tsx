@@ -41,7 +41,7 @@ const RegisterForm = () => {
                     fontWeight={600}
                     margin={'1rem 0'}> Sign up for Reactivities </Typography>
                 <TextField
-                    fullWidth
+                    fullWidth={true}
                     margin="normal"
                     id="displayName"
                     name="displayName"
@@ -53,7 +53,7 @@ const RegisterForm = () => {
                     helperText={formik.touched.displayName && formik.errors.displayName}
                 />
                 <TextField
-                    fullWidth
+                    fullWidth={true}
                     margin="normal"
                     id="username"
                     name="username"
@@ -65,7 +65,7 @@ const RegisterForm = () => {
                     helperText={formik.touched.username && formik.errors.username}
                 />
                 <TextField
-                    fullWidth
+                    fullWidth={true}
                     margin="normal"
                     id="email"
                     name="email"
@@ -77,7 +77,7 @@ const RegisterForm = () => {
                     helperText={formik.touched.email && formik.errors.email}
                 />
                 <TextField
-                    fullWidth
+                    fullWidth={true}
                     margin="normal"
                     id="password"
                     name="password"
