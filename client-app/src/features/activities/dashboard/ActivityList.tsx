@@ -1,7 +1,8 @@
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import { Box, Typography } from "@mui/material";
+import { useStore } from "app/stores/store";
 import { observer } from "mobx-react-lite";
 import { Fragment } from "react";
-import { Header } from "semantic-ui-react";
-import { useStore } from "app/stores/store";
 import ActivityListItem from "./ActivityListItem";
 
 const ActivityList = () => {
@@ -12,9 +13,10 @@ const ActivityList = () => {
         <>
             {groupActivities.map(([group, activities]) => (
                 <Fragment key={group}>
-                    <Header sub color='teal'>
-                        {group}
-                    </Header>
+                    <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+                        <KeyboardDoubleArrowRightIcon fontSize="large" />
+                        <Typography variant="h6" sx={{ fontSize: 18 }} color={'secondary.light'}>{group}</Typography>
+                    </Box>
                     {activities.map(activity => (
                         <ActivityListItem key={activity.id} activity={activity} />
                     ))}

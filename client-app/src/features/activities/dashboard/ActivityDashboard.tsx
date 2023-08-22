@@ -3,7 +3,6 @@ import { useStore } from "app/stores/store";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-// import { Grid, Loader } from "semantic-ui-react";
 import ActivityFilters from "./ActivityFilters";
 import ActivityList from "./ActivityList";
 import ActivityListItemPlaceholder from "./ActivityListItemPlaceholder";
