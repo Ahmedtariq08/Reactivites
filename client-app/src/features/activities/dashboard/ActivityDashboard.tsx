@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import ActivityFilters from "./ActivityFilters";
 import ActivityList from "./ActivityList";
 import ActivityListItemPlaceholder from "./ActivityListItemPlaceholder";
-import { Container, Grid } from "@mui/material";
+import { Box, CircularProgress, Container, Grid } from "@mui/material";
 
 const ActivityDashboard = () => {
     const { activityStore } = useStore();
@@ -26,8 +26,8 @@ const ActivityDashboard = () => {
     }, [loadActivities, activityRegistry.size]);
 
     return (
-        <Container sx={{ overflow: 'atuo', }}>
-            <Grid container direction={'row'} spacing={4}>
+        <Box sx={{ overflow: 'atuo', margin: '1rem 7rem 4rem 7rem' }}>
+            <Grid container direction={'row'} spacing={5}>
                 <Grid item xs={8}>
                     {activityStore.loadingInitial && !loadingNext ? (
                         <>
@@ -45,14 +45,14 @@ const ActivityDashboard = () => {
                         </InfiniteScroll>
                     )}
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     <ActivityFilters />
                 </Grid>
-                <Grid item xs={10}>
-                    {/* <Loader active={loadingNext} /> */}
-                </Grid>
             </Grid>
-        </Container>
+            {loadingNext && <Box flexDirection={'row'} display={'flex'} justifyContent={'center'}>
+                <CircularProgress />
+            </Box>}
+        </Box>
     )
 }
 

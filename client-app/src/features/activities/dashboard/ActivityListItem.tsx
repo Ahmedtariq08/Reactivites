@@ -6,6 +6,7 @@ import { NavigateTo, router } from "app/router/Routes";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { CardContent } from "semantic-ui-react";
+import { Colors } from 'app/layout/theme';
 
 interface Props {
     activity: Activity
@@ -13,15 +14,6 @@ interface Props {
 
 const ActivityListItem = (props: Props) => {
     const { activity } = props;
-
-    const CancelledHeader = () => {
-        return (<CardHeader
-            sx={{ backgroundColor: 'firebrick', padding: '0.5rem' }}
-            title='Cancelled'
-            titleTypographyProps={{ fontSize: 16, fontWeight: 600 }}
-        />
-        )
-    }
 
     const HostImage = () => {
         return (<Avatar
@@ -31,13 +23,18 @@ const ActivityListItem = (props: Props) => {
         />)
     }
 
-    const HostOrGoing = (props: { color: string, title: string }) => {
+    const ActivityStatusForUser = () => {
+        let backgroundColor = activity.isCancelled ? Colors.Cancelled : (activity.isHost ? Colors.IsHost : Colors.Going);
+        let title = activity.isCancelled ? 'Cancelled' : (activity.isHost ? 'Hosting' : 'Going');
         return (<Typography variant="body2" sx={{
-            color: `${props.color}`,
-            border: `1px solid ${props.color}`,
+            width: 'fit-content',
+            textAlign: 'center',
+            color: `whitesmoke`,
+            border: `1px solid black`,
+            backgroundColor: backgroundColor,
             borderRadius: 1,
             padding: '2px 4px'
-        }}><strong>{props.title}</strong></Typography>
+        }}><strong>{title}</strong></Typography>
         )
     }
 
@@ -56,9 +53,7 @@ const ActivityListItem = (props: Props) => {
                     {activity.title}
                 </Typography>
                 <Typography>Hosted By <Link to={NavigateTo.Profile(activity.hostUsername)}>{activity.host?.displayName}</Link></Typography>
-
-                {activity.isHost && <HostOrGoing color="maroon" title="You are hosting this activity" />}
-                {activity.isGoing && !activity.isHost && <HostOrGoing color="green" title='You are going to this activity' />}
+                <ActivityStatusForUser />
             </Box>)
     }
 
@@ -67,11 +62,11 @@ const ActivityListItem = (props: Props) => {
             <>
                 <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'flex-end'}>
                     <AccessTimeIcon color="primary" />
-                    <Typography color={'ButtonText'} gutterBottom marginLeft={'1rem'}>{format(activity.date!, 'dd MMMM yyyy -  h:mm aa')}</Typography>
+                    <Typography color={'ButtonText'} gutterBottom marginLeft={'0.5rem'}>{format(activity.date!, 'dd MMMM yyyy -  h:mm aa')}</Typography>
                 </Box>
                 <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
                     <LocationOnIcon />
-                    <Typography marginLeft={'1rem'}>{activity.venue}</Typography>
+                    <Typography marginLeft={'0.5rem'}>{activity.venue}</Typography>
                 </Box>
             </>
         )
@@ -92,17 +87,17 @@ const ActivityListItem = (props: Props) => {
         )
     }
     return (
-        <Card sx={{ backgroundColor: "rgb(243, 228, 247)", padding: '0rem 1rem', margin: '1rem 0' }}>
-            {activity.isCancelled && <CancelledHeader />}
+        <Card sx={{ backgroundColor: Colors.LightPurple, padding: '0rem 1rem', margin: '1rem 0' }}>
             <CardContent>
                 <Box display={'flex'} flexDirection={'row'} margin={'1rem 0rem'} justifyContent={'space-between'}>
                     <Box display={'flex'} flexDirection={'row'}>
                         <HostImage />
                         <ActivityMainContent />
                     </Box>
-                    <Box display={'flex'} flexDirection={'column'} justifyContent={'space-around'}>
-                        <TimeAndLocation />
-                    </Box>
+                </Box>
+                <Divider />
+                <Box display={'flex'} flexDirection={'row'} justifyContent={'space-between'} margin={'0.5rem 1rem'}>
+                    <TimeAndLocation />
                 </Box>
                 <Divider />
                 <Box margin={'0.2rem 0rem'}>

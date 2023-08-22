@@ -18,56 +18,58 @@ const copyRights = `©Copyright ${currentYear}. All Rights Reserved.`
 
 export const Footer: FC = (): ReactElement => {
     return (
-        <AppBar position="static" sx={{ position: 'fixed', bottom: 0 }}>
-            <Box
-                display='flex'
-                flexDirection={'row'}
-                alignItems={'center'}
-                justifyContent={'space-between'}
-                margin={'0.5rem 2rem'}
-            >
-                <Box display={'flex'} flexDirection={'column'}>
-                    <Typography><strong>&nbsp; Ahmed Tariq</strong></Typography>
-                    <Typography><i>{copyRights}</i></Typography>
-                </Box>
+        <div style={{ overflow: 'hidden' }}>
+            <AppBar position="static" sx={{ position: 'fixed', bottom: 0 }}>
                 <Box
-                    display={'flex'}
+                    display='flex'
                     flexDirection={'row'}
                     alignItems={'center'}
-                    justifyContent={'flex-end'}>
-                    <IconButton
-                        href={facebookLink}
-                        title="Facebook"
-                        target="_blank"
-                        children={<FacebookIcon fontSize="medium" sx={{ color: 'whitesmoke' }} />}
-                    />
-                    <IconButton
-                        href={mailLink}
-                        title="Gmail"
-                        target="_blank"
-                        children={<EmailIcon sx={{ color: 'whitesmoke' }} />}
-                    />
-                    <IconButton
-                        href={instaLink}
-                        title="Instagram"
-                        target="_blank"
-                        children={<InstagramIcon sx={{ color: 'whitesmoke' }} />}
-                    />
-                    <IconButton
-                        href={linkedInLink}
-                        title="LinkedIn"
-                        target="_blank"
-                        children={<LinkedInIcon sx={{ color: 'whitesmoke' }} />}
-                    />
-                    <IconButton
-                        href={githubLink}
-                        title="Github"
-                        target="_blank"
-                        children={<GitHubIcon sx={{ color: 'whitesmoke' }} />}
-                    />
+                    justifyContent={'space-between'}
+                    margin={'0.5rem 2rem'}
+                >
+                    <Box display={'flex'} flexDirection={'column'}>
+                        <Typography><strong>&nbsp; Ahmed Tariq</strong></Typography>
+                        <Typography><i>{copyRights}</i></Typography>
+                    </Box>
+                    <Box
+                        display={'flex'}
+                        flexDirection={'row'}
+                        alignItems={'center'}
+                        justifyContent={'flex-end'}>
+                        <IconButton
+                            href={facebookLink}
+                            title="Facebook"
+                            target="_blank"
+                            children={<FacebookIcon fontSize="medium" sx={{ color: 'whitesmoke' }} />}
+                        />
+                        <IconButton
+                            href={mailLink}
+                            title="Gmail"
+                            target="_blank"
+                            children={<EmailIcon sx={{ color: 'whitesmoke' }} />}
+                        />
+                        <IconButton
+                            href={instaLink}
+                            title="Instagram"
+                            target="_blank"
+                            children={<InstagramIcon sx={{ color: 'whitesmoke' }} />}
+                        />
+                        <IconButton
+                            href={linkedInLink}
+                            title="LinkedIn"
+                            target="_blank"
+                            children={<LinkedInIcon sx={{ color: 'whitesmoke' }} />}
+                        />
+                        <IconButton
+                            href={githubLink}
+                            title="Github"
+                            target="_blank"
+                            children={<GitHubIcon sx={{ color: 'whitesmoke' }} />}
+                        />
+                    </Box>
                 </Box>
-            </Box>
-        </AppBar>
+            </AppBar>
+        </div>
     );
 };
 

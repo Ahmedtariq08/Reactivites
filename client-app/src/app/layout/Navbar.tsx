@@ -89,7 +89,7 @@ const NavBar = () => {
     }
     //sx={{ position: 'fixed', bottom: 0 }}
     return (
-        <div >
+        <div style={{ overflow: 'hidden' }} >
             <AppBar position="static" sx={{ minWidth: '100%' }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>

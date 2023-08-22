@@ -82,12 +82,12 @@ body {
   min-width: 100vw;
   background-color: rgb(100, 53, 123);
   min-height: 86vh;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .app-content-container {
   background-color: rgb(100, 53, 123);
   width: 100%;
   min-height: inherit;
-  overflow: auto;
+  /* overflow: auto; */
 }

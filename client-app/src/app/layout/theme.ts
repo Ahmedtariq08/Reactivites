@@ -12,6 +12,13 @@ export const theme = createTheme({
     },
 });
 
+export const Colors = {
+    Cancelled: 'firebrick',
+    IsHost: '#2596be',
+    Going: 'green',
+    LightPurple: 'rgb(243, 228, 247)'
+}
+
 //purple: #2b072a
 //mustard: #ab5600
 //deep blue: #050424
