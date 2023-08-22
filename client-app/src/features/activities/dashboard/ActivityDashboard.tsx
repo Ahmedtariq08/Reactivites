@@ -3,10 +3,11 @@ import { useStore } from "app/stores/store";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import { Grid, Loader } from "semantic-ui-react";
+// import { Grid, Loader } from "semantic-ui-react";
 import ActivityFilters from "./ActivityFilters";
 import ActivityList from "./ActivityList";
 import ActivityListItemPlaceholder from "./ActivityListItemPlaceholder";
+import { Container, Grid } from "@mui/material";
 
 const ActivityDashboard = () => {
     const { activityStore } = useStore();
@@ -26,31 +27,33 @@ const ActivityDashboard = () => {
     }, [loadActivities, activityRegistry.size]);
 
     return (
-        <Grid>
-            <Grid.Column width={'10'}>
-                {activityStore.loadingInitial && !loadingNext ? (
-                    <>
-                        <ActivityListItemPlaceholder />
-                        <ActivityListItemPlaceholder />
-                    </>
-                ) : (
-                    <InfiniteScroll
-                        pageStart={0}
-                        loadMore={handleGetNext}
-                        hasMore={!loadingNext && !!pagination && pagination.currentPage < pagination.totalPages}
-                        initialLoad={false}
-                    >
-                        <ActivityList />
-                    </InfiniteScroll>
-                )}
-            </Grid.Column>
-            <Grid.Column width={'6'}>
-                <ActivityFilters />
-            </Grid.Column>
-            <Grid.Column width={10}>
-                <Loader active={loadingNext} />
-            </Grid.Column>
-        </Grid>
+        <Container sx={{ marginTop: '2rem', marginBottom: '2rem', overflow: 'atuo' }}>
+            <Grid container direction={'row'} spacing={4}>
+                <Grid item xs={8}>
+                    {activityStore.loadingInitial && !loadingNext ? (
+                        <>
+                            <ActivityListItemPlaceholder />
+                            <ActivityListItemPlaceholder />
+                        </>
+                    ) : (
+                        <InfiniteScroll
+                            pageStart={0}
+                            loadMore={handleGetNext}
+                            hasMore={!loadingNext && !!pagination && pagination.currentPage < pagination.totalPages}
+                            initialLoad={false}
+                        >
+                            <ActivityList />
+                        </InfiniteScroll>
+                    )}
+                </Grid>
+                <Grid item xs={4}>
+                    <ActivityFilters />
+                </Grid>
+                <Grid item xs={10}>
+                    {/* <Loader active={loadingNext} /> */}
+                </Grid>
+            </Grid>
+        </Container>
     )
 }
 

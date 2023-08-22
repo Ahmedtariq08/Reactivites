@@ -42,7 +42,7 @@ const NavBar = () => {
         return (
             <Button
                 onClick={() => router.navigate(NavigateTo.Root)}
-                sx={{ display: { xs: 'none', md: 'flex' } }}
+                sx={{ display: { xs: 'none', md: 'flex' }, marginRight: '2rem' }}
                 variant='contained'
                 startIcon={<Avatar variant='circular' src='captain.ico' />}>
                 <Typography
@@ -87,57 +87,59 @@ const NavBar = () => {
             </Box>
         )
     }
-
+    //sx={{ position: 'fixed', bottom: 0 }}
     return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <HomeButton />
-                    {isLoggedIn &&
-                        <>
-                            <TabBar />
-                            <Box sx={{ flexGrow: 0 }}>
-                                <Button
-                                    sx={{ color: 'wheat' }}
-                                    onClick={handleOpenUserMenu}
-                                    startIcon={<Avatar variant='circular' src={user?.image || '/assets/user.png'} />}
-                                    endIcon={<KeyboardArrowDownIcon fontSize='large' />}
-                                >
-                                </Button>
-                                <Menu
-                                    sx={{ mt: '50px' }}
-                                    id="menu-appbar"
-                                    anchorEl={anchorElUser}
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    open={Boolean(anchorElUser)}
-                                    onClose={handleCloseUserMenu}
-                                >
-                                    <MenuItem onClick={() => router.navigate(NavigateTo.Profile(user?.username!))}>
-                                        <ListItemIcon>
-                                            <LogoutIcon />
-                                        </ListItemIcon>
-                                        <Typography textAlign="center">My Profile</Typography>
-                                    </MenuItem>
-                                    <MenuItem onClick={logout}>
-                                        <ListItemIcon>
-                                            <AccountBoxIcon />
-                                        </ListItemIcon>
-                                        <Typography textAlign="center">Sign Out</Typography>
-                                    </MenuItem>
-                                </Menu>
-                            </Box>
-                        </>}
-                </Toolbar>
-            </Container>
-        </AppBar>
+        <div >
+            <AppBar position="static" sx={{ minWidth: '100%' }}>
+                <Container maxWidth="xl">
+                    <Toolbar disableGutters>
+                        <HomeButton />
+                        {isLoggedIn &&
+                            <>
+                                <TabBar />
+                                <Box sx={{ flexGrow: 0 }}>
+                                    <Button
+                                        sx={{ color: 'wheat' }}
+                                        onClick={handleOpenUserMenu}
+                                        startIcon={<Avatar variant='circular' src={user?.image || '/assets/user.png'} />}
+                                        endIcon={<KeyboardArrowDownIcon fontSize='large' />}
+                                    >
+                                    </Button>
+                                    <Menu
+                                        sx={{ mt: '50px' }}
+                                        id="menu-appbar"
+                                        anchorEl={anchorElUser}
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        open={Boolean(anchorElUser)}
+                                        onClose={handleCloseUserMenu}
+                                    >
+                                        <MenuItem onClick={() => router.navigate(NavigateTo.Profile(user?.username!))}>
+                                            <ListItemIcon>
+                                                <LogoutIcon />
+                                            </ListItemIcon>
+                                            <Typography textAlign="center">My Profile</Typography>
+                                        </MenuItem>
+                                        <MenuItem onClick={logout}>
+                                            <ListItemIcon>
+                                                <AccountBoxIcon />
+                                            </ListItemIcon>
+                                            <Typography textAlign="center">Sign Out</Typography>
+                                        </MenuItem>
+                                    </Menu>
+                                </Box>
+                            </>}
+                    </Toolbar>
+                </Container>
+            </AppBar>
+        </div>
     )
 };
 

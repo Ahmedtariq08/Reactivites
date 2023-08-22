@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { Container } from 'semantic-ui-react';
+import Footer from './Footer';
 import LoadingComponent from './LoadingComponent';
 import NavBar from './Navbar';
 
@@ -31,12 +31,15 @@ function App() {
       <ModalContainer />
       <ToastContainer position='bottom-right' hideProgressBar theme='colored' />
       {location.pathname === '/' ? <HomePage /> :
-        <>
+        <div>
           <NavBar />
-          <Container style={{ marginTop: '7rem' }}>
-            <Outlet />
-          </Container>
-        </>
+          <div className='app-main-container'>
+            <div className='app-content-container'>
+              <Outlet />
+            </div>
+          </div>
+          <Footer />
+        </div>
       }
     </>
   );

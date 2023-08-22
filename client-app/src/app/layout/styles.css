@@ -1,5 +1,6 @@
 body {
   background-color: #eaeaea;
+  margin: 0
 }
 
 @font-face {
@@ -51,6 +52,8 @@ body {
 
 
 /* STYLES FOR MATERIAL UI */
+
+/* Home Page */
 .marvel-background {
   display: flex;
   align-items: center;
@@ -72,4 +75,19 @@ body {
   width: 300;
   font-weight: 600;
   font-size: larger;
+}
+
+/* Activities page */
+.app-main-container {
+  min-width: 100vw;
+  background-color: rgb(100, 53, 123);
+  min-height: 86vh;
+  overflow: hidden;
+}
+
+.app-content-container {
+  background-color: rgb(100, 53, 123);
+  width: 100%;
+  min-height: inherit;
+  overflow: auto;
 }
