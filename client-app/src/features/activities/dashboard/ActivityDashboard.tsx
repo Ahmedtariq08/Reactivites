@@ -30,10 +30,7 @@ const ActivityDashboard = () => {
             <Grid container direction={'row'} spacing={5}>
                 <Grid item xs={8}>
                     {activityStore.loadingInitial && !loadingNext ? (
-                        <>
-                            <ActivityListItemPlaceholder />
-                            <ActivityListItemPlaceholder />
-                        </>
+                        <ActivityListItemPlaceholder />
                     ) : (
                         <InfiniteScroll
                             pageStart={0}
