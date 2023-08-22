@@ -6,13 +6,13 @@ export const theme = createTheme({
             main: '#32163C',
         },
         secondary: {
-            main: '#ab5600',
+            main: '#f5deb3',
             light: '#f5deb3'
         },
     },
 });
 
 //purple: #2b072a
-//mustard: #ea6e20
+//mustard: #ab5600
 //deep blue: #050424
 //wheat: #f5deb3

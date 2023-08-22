@@ -26,7 +26,7 @@ const ActivityDashboard = () => {
     }, [loadActivities, activityRegistry.size]);
 
     return (
-        <Container sx={{ marginTop: '2rem', marginBottom: '2rem', overflow: 'atuo' }}>
+        <Container sx={{ overflow: 'atuo', }}>
             <Grid container direction={'row'} spacing={4}>
                 <Grid item xs={8}>
                     {activityStore.loadingInitial && !loadingNext ? (

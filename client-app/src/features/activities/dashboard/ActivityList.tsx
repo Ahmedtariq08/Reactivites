@@ -13,13 +13,15 @@ const ActivityList = () => {
         <>
             {groupActivities.map(([group, activities]) => (
                 <Fragment key={group}>
-                    <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+                    <Box display={'flex'} flexDirection={'row'} alignItems={'center'} marginTop={'2rem'}>
                         <KeyboardDoubleArrowRightIcon fontSize="large" />
                         <Typography variant="h6" sx={{ fontSize: 18 }} color={'secondary.light'}>{group}</Typography>
                     </Box>
+                    {/* <Box margin={'2rem 0'}> */}
                     {activities.map(activity => (
                         <ActivityListItem key={activity.id} activity={activity} />
                     ))}
+                    {/* </Box> */}
                 </Fragment>
             ))}
         </>
