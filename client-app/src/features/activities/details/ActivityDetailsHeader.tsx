@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { useStore } from 'app/stores/store';
 import { NavigateTo } from 'app/router/Routes';
+import { Box } from '@mui/material';
 
 const activityImageStyle = {
     filter: 'brightness(30%)'
@@ -25,6 +26,14 @@ interface Props {
 
 export default observer(function ActivityDetailsHeader({ activity }: Props) {
     const { activityStore: { updateAttendance, loading, cancelActivityToggle } } = useStore();
+
+    const MUI = () => {
+        return (
+            <Box>
+
+            </Box>
+        )
+    }
     return (
         <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
