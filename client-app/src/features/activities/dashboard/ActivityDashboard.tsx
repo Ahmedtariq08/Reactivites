@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import ActivityFilters from "./ActivityFilters";
 import ActivityList from "./ActivityList";
 import ActivityListItemPlaceholder from "./ActivityListItemPlaceholder";
-import { Box, CircularProgress, Container, Grid } from "@mui/material";
+import { Box, CircularProgress, Grid } from "@mui/material";
 
 const ActivityDashboard = () => {
     const { activityStore } = useStore();

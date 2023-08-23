@@ -31,16 +31,10 @@ const ActivityList = () => {
 
                         ))}
                     </Grid>
-                    {/* {activities.map(activity => (
-                        <ActivityListItem key={activity.id} activity={activity} />
-                    ))} */}
                 </Fragment>
             ))}
         </>
-
-
     )
-
 }
 
 export default observer(ActivityList);
