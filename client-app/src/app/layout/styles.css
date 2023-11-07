@@ -80,13 +80,21 @@ body {
 /* Activities page */
 .app-main-container {
   min-width: 100vw;
-  background-color: rgb(100, 53, 123);
+  /* background-color: rgb(100, 53, 123); */
+  /* background: rgb(193,193,193);
+  background: radial-gradient(circle at 90% 5%, rgba(123,123,123,1) 0%, rgba(50,50,50,1) 26%, rgba(0,0,0,1) 52%); */
+  /* background: linear-gradient(to right, #8e7cc3, #d8e9ff, #8e7cc3); */
+  background-image: url("/public/assets/subtle-prism.svg");
   min-height: 86vh;
   overflow: scroll;
 }
 
 .app-content-container {
-  background-color: rgb(100, 53, 123);
+  /* background-color: rgb(100, 53, 123); */
+  /* background: rgb(193,193,193);
+  background: radial-gradient(circle at 90% 5%, rgba(123,123,123,1) 0%, rgba(50,50,50,1) 26%, rgba(0,0,0,1) 52%); */
+  /* background: linear-gradient(to right, #8e7cc3, #d8e9ff, #8e7cc3); */
+  background-image: url("/public/assets/subtle-prism.svg");
   width: 100%;
   min-height: inherit;
   /* overflow: auto; */
