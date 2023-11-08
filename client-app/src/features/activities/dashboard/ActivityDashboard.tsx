@@ -1,3 +1,4 @@
+import { Box, CircularProgress, Grid } from "@mui/material";
 import { PagingParams } from "app/models/pagination";
 import { useStore } from "app/stores/store";
 import { observer } from "mobx-react-lite";
@@ -6,7 +7,6 @@ import InfiniteScroll from "react-infinite-scroller";
 import ActivityFilters from "./ActivityFilters";
 import ActivityList from "./ActivityList";
 import ActivityListItemPlaceholder from "./ActivityListItemPlaceholder";
-import { Box, CircularProgress, Grid } from "@mui/material";
 
 const ActivityDashboard = () => {
     const { activityStore } = useStore();
@@ -17,7 +17,7 @@ const ActivityDashboard = () => {
         setLoadingNext(true);
         setPagingParams(new PagingParams(pagination!.currentPage + 1));
         loadActivities().then(() => setLoadingNext(false));
-    }
+    };
 
     useEffect(() => {
         if (activityRegistry.size <= 1) {
@@ -26,8 +26,8 @@ const ActivityDashboard = () => {
     }, [loadActivities, activityRegistry.size]);
 
     return (
-        <Box sx={{ overflow: 'atuo', margin: '1rem 7rem 4rem 7rem' }}>
-            <Grid container direction={'row'} spacing={5}>
+        <Box sx={{ overflow: "atuo", margin: "1rem 7rem 4rem 7rem" }}>
+            <Grid container direction={"row"} spacing={5}>
                 <Grid item xs={8}>
                     {activityStore.loadingInitial && !loadingNext ? (
                         <ActivityListItemPlaceholder />
@@ -35,7 +35,9 @@ const ActivityDashboard = () => {
                         <InfiniteScroll
                             pageStart={0}
                             loadMore={handleGetNext}
-                            hasMore={!loadingNext && !!pagination && pagination.currentPage < pagination.totalPages}
+                            hasMore={
+                                !loadingNext && !!pagination && pagination.currentPage < pagination.totalPages
+                            }
                             initialLoad={false}
                         >
                             <ActivityList />
@@ -46,11 +48,13 @@ const ActivityDashboard = () => {
                     <ActivityFilters />
                 </Grid>
             </Grid>
-            {loadingNext && <Box flexDirection={'row'} display={'flex'} justifyContent={'center'}>
-                <CircularProgress />
-            </Box>}
+            {loadingNext && (
+                <Box flexDirection={"row"} display={"flex"} justifyContent={"center"}>
+                    <CircularProgress />
+                </Box>
+            )}
         </Box>
-    )
-}
+    );
+};
 
 export default observer(ActivityDashboard);
