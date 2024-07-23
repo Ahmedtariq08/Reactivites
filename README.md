@@ -1,4 +1,7 @@
 # Reactivities
+
+![](demo/reactivties.gif)
+
 #### Server Side
 - .NET Core (v2.2) application with Clean Architecture using the CQRS + Mediator pattern
 - Identity and Authentication modules using .NET Core Identity

@@ -1,55 +1,88 @@
-import FacebookLogin from "@greatsumini/react-facebook-login";
-import { NavigateTo } from "app/router/Routes";
+import { NavigateTo, router } from "app/router/Routes";
 import { useStore } from "app/stores/store";
 import LoginForm from "features/users/LoginForm";
 import RegisterForm from "features/users/RegisterForm";
 import { observer } from "mobx-react-lite";
-import { Link } from "react-router-dom"
-import { Button, Container, Divider, Header, Image, Segment } from "semantic-ui-react"
+import { Button, Typography } from "@mui/material";
 
 const HomePage = () => {
     const { userStore, modalStore } = useStore();
+
+    const MarvelImage = () => {
+        return (
+            <img src="/assets/marvel/marvel-logo.png"
+                alt='Marvel logo'
+                style={{
+                    width: 200,
+                    height: 120,
+                    objectFit: 'contain'
+                }}></img>
+        )
+    }
+
+    const LoginButton = () => {
+        return (
+            <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                sx={{
+                    width: 200,
+                    fontWeight: 600,
+                    fontSize: 16,
+                    marginTop: '4rem'
+                }}
+                onClick={() => modalStore.openModal(<LoginForm />)}>Login</Button>
+        )
+    }
+
+    const RegisterButton = () => {
+        return (
+            <Button
+                variant="contained"
+                color="secondary"
+                sx={{
+                    width: 200,
+                    fontWeight: 600,
+                    fontSize: 16,
+                    marginTop: '2rem'
+                }}
+                onClick={() => modalStore.openModal(<RegisterForm />)}>Register</Button>
+        )
+    }
+
+    const GoToActivitiesButton = () => {
+        return (
+            <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                    width: 200,
+                    fontWeight: 600,
+                    fontSize: 16,
+                    marginTop: '2rem'
+                }}
+                onClick={() => router.navigate(NavigateTo.Activities)}>Go to Activities</Button>
+        )
+    }
+
     return (
-        <Segment inverted textAlign="center" vertical className="masthead">
-            <Container text>
-                <Header as={'h1'} inverted>
-                    <Image size="massive" src='/assets/logo.png' alt='logo' style={{ marginBottom: 12 }} />
-                    Reactivities
-                </Header>
-                {userStore.isLoggedIn ? (
+        <div className="marvel-background">
+            <div className="content-container">
+                <MarvelImage />
+                {userStore.isLoggedIn ?
                     <>
-                        <Header as='h2' inverted content='Welcome to Reactivities' />
-                        <Button as={Link} to={NavigateTo.Activities} size="huge" inverted>
-                            Go to Activities!
-                        </Button>
-                    </>
-                ) : (
+                        <Typography variant="h4" color='wheat' fontFamily='Fiver'> Welcome to </Typography>
+                        <Typography variant="h1" color='wheat' fontFamily='Fiver'> REACTIVITIES </Typography>
+                        <GoToActivitiesButton />
+                    </> :
                     <>
-                        <Button onClick={() => modalStore.openModal(<LoginForm />)} size="huge" inverted>
-                            Login!
-                        </Button>
-                        <Button onClick={() => modalStore.openModal(<RegisterForm />)} size="huge" inverted>
-                            Register!
-                        </Button>
-                        <Divider horizontal inverted>Or</Divider>
-                        <Button
-                            as={FacebookLogin}
-                            appId={673369484660128}
-                            size="huge"
-                            inverted
-                            color="facebook"
-                            content="Login with Facebook"
-                            onSuccess={(response: any) => {
-                                console.log("Login sucess", response);
-                            }}
-                            onFail={(response: any) => {
-                                console.log("Login failed", response);
-                            }}
-                        />
-                    </>
-                )}
-            </Container>
-        </Segment>
+                        <Typography variant="h1" color='wheat' fontFamily='Fiver'> REACTIVITIES </Typography>
+                        <LoginButton />
+                        <RegisterButton />
+                    </>}
+            </div>
+        </div>
     )
 }
 
