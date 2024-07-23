@@ -1,5 +1,11 @@
 body {
   background-color: #eaeaea;
+  margin: 0
+}
+
+@font-face {
+  font-family: Fiver;
+  src: url('/public/assets/FiverRegular.ttf');
 }
 
 .ui.inverted.top.fixed.menu {
@@ -42,4 +48,46 @@ body {
 
 .react-datepicker-wrapper {
   width: 100%;
+}
+
+
+/* STYLES FOR MATERIAL UI */
+
+/* Home Page */
+.marvel-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/public/assets/marvel/homeBackground.jpg') !important;
+  background-size: cover !important;
+  width: 100vw;
+  height: 100vh;
+}
+
+.content-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.home-buttons {
+  width: 300;
+  font-weight: 600;
+  font-size: larger;
+}
+
+/* Activities page */
+.app-main-container {
+  min-width: 100vw;
+  background-image: url("/public/assets/subtle-prism.svg");
+  min-height: 86vh;
+  overflow: scroll;
+}
+
+.app-content-container {
+  background-image: url("/public/assets/subtle-prism.svg");
+  width: 100%;
+  min-height: inherit;
+  /* overflow: auto; */
 }

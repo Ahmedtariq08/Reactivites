@@ -1,15 +1,15 @@
+import { Dialog, DialogContent } from "@mui/material";
 import { useStore } from "app/stores/store";
-import { observer } from "mobx-react-lite"
-import { Modal } from "semantic-ui-react";
+import { observer } from "mobx-react-lite";
 
 const ModalContainer = () => {
     const { modalStore } = useStore();
     return (
-        <Modal dimmer='blurring' open={modalStore.modal.open} onClose={modalStore.closeModal} size="mini">
-            <Modal.Content>
+        <Dialog open={modalStore.modal.open} onClose={modalStore.closeModal}>
+            <DialogContent>
                 {modalStore.modal.body}
-            </Modal.Content>
-        </Modal>
+            </DialogContent>
+        </Dialog>
     )
 }
 
